@@ -3,35 +3,35 @@ import React, { useState, useEffect, useRef } from 'react';
 
 // --- INITIAL DATA & SEED STATES (Simulating PostgreSQL Records) ---
 const INITIAL_PROPERTY_INFO = {
-    title: "The Obsidian Pavilion",
-    tagline: "Ultra-luxury architectural retreat with infinity views",
-    description: "Suspended over a tranquil valley, The Obsidian Pavilion combines raw minimalist concrete architecture with warm, premium organic interiors. Designed by award-winning architects, this architectural sanctuary features floor-to-ceiling glass paneling, a sweeping cantilevered heated swimming pool, an outdoor cedar wood sauna, and curated modern art. Experience complete peace and seclusion while remaining only minutes away from world-class dining and trails.",
-    guestCapacity: 6,
-    bedrooms: 3,
-    beds: 4,
-    baths: 3.5,
-    location: "Pacific Heights, California",
+    title: "Samruddhi",
+    tagline: "Prosperity in everything you do",
+    description: "Fully furnished home with state of art interiors & ambient modern lightings with spacious living area & bedrooms. Modern kitchen with all required equipment and provision to cook yourself. Perfect place for relaxed stay for two to three families. \n\nSituated in a quiet locality proximity to popular establishments and attractions. Make your stay more memorable by staying at our home to get a feel of your(dream) home.",
+    guestCapacity: 4,
+    bedrooms: 2,
+    beds: 2,
+    baths: 2,
+    location: "Landlinks Layout, Ashok Nagar, Mangaluru, Karnataka",
     pricePerNight: 850,
-    airbnbUrl: "https://airbnb.com/h/obsidian-pavilion-luxury-demo",
-    hostName: "Marcus & Elena",
-    hostEmail: "concierge@obsidianpavilion.com",
-    hostPhone: "+1 (415) 555-0192",
+    airbnbUrl: "https://www.airbnb.com/rooms/1144005697334700762",
+    hostName: "Mohan Nagesh Shenoy",
+    hostEmail: "mohan@samruddhi.com",
+    hostPhone: "+91 9876543210",
     images: [
-        { id: 1, url: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1200&q=80", caption: "Architectural Exterior" },
-        { id: 2, url: "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=800&q=80", caption: "Sunken Modern Living Room" },
-        { id: 3, url: "https://images.unsplash.com/photo-1598928506311-c55ded91a20c?auto=format&fit=crop&w=800&q=80", caption: "Primary Suite with Panoramic Panes" },
-        { id: 4, url: "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=800&q=80", caption: "Heated Infinity Edge Pool" },
-        { id: 5, url: "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=800&q=80", caption: "Chef's Kitchen & Marble Island" }
+        { id: 1, url: "/images/2c781291-fff0-4385-b1cf-4f9bf1fc01cf.jpg.jpeg", caption: "Premium Exterior View" },
+        { id: 2, url: "/images/1fd428c9-8729-420a-be13-6f9ec671dca7.jpeg", caption: "Ambient Living Area" },
+        { id: 3, url: "/images/00f6fa1b-f20b-46f4-9e50-b495a9e7c4d8.jpg.jpeg", caption: "Modern Gourmet Kitchen" },
+        { id: 4, url: "/images/2d132371-d86d-43b0-8349-f769ee45b909.jpeg", caption: "Spacious Master Bedroom" },
+        { id: 5, url: "/images/6e792fca-5775-4560-be8b-59d4c92c22f0.jpeg", caption: "Elegant Dining Space" }
     ],
     amenities: [
-        { id: "pool", label: "Heated Infinity Pool", active: true, icon: "pool" },
-        { id: "sauna", label: "Cedar Wood Sauna", active: true, icon: "sauna" },
-        { id: "kitchen", label: "Chef's Kitchen", active: true, icon: "chef" },
-        { id: "fireplace", label: "Modernist Fireplace", active: true, icon: "fire" },
-        { id: "wifi", label: "Starlink High-Speed Wi-Fi", active: true, icon: "wifi" },
-        { id: "parking", label: "EV Charging Station Included", active: true, icon: "ev" },
-        { id: "tub", label: "Outdoor Japanese Soaking Tub", active: true, icon: "tub" },
-        { id: "gym", label: "Private Fitness Suite", active: false, icon: "gym" }
+        { id: "ac", label: "Air conditioning", active: true, icon: "snowflake" },
+        { id: "tv", label: "65-inch TV", active: true, icon: "tv" },
+        { id: "kitchen", label: "Samsung & Hindware Kitchen", active: true, icon: "chef" },
+        { id: "wifi", label: "High-Speed Wi-Fi", active: true, icon: "wifi" },
+        { id: "parking", label: "Free Premises Parking", active: true, icon: "car" },
+        { id: "safety", label: "24/7 Security Cameras", active: true, icon: "security" },
+        { id: "laundry", label: "Washing Machine", active: true, icon: "laundry" },
+        { id: "family", label: "Cot & Family Essentials", active: true, icon: "family" }
     ]
 };
 
@@ -59,9 +59,9 @@ const INITIAL_BOOKINGS = [
 ];
 
 const REVIEWS = [
-    { name: "Sophia Mitchell", location: "London, UK", date: "May 2026", rating: 5, comment: "An architectural masterpiece. The views are incredible, the beds feel like clouds, and the outdoor barrel sauna is magical. Absolutely worth every penny." },
-    { name: "Daniel Chen", location: "Singapore", date: "April 2026", rating: 5, comment: "I've stayed in luxury Airbnbs worldwide, but the Obsidian Pavilion stands alone. Marcus and Elena were phenomenal hosts with unparalleled attention to detail." },
-    { name: "Alexandra V.", location: "New York, NY", date: "March 2026", rating: 5, comment: "Breathtaking minimalist concrete aesthetics coupled with high-end luxury details. Waking up to the floor-to-ceiling forest fog was unforgettable." }
+    { name: "Recent Guest", location: "Global", date: "June 2026", rating: 4.8, comment: "Spacious with modern lighting. Truly feels like a home away from home. The kitchen is fully equipped and the host Mohan was very responsive." },
+    { name: "Verified Stay", location: "India", date: "May 2026", rating: 5, comment: "Great location near popular attractions but still in a quiet neighborhood. Perfect for families. The 65-inch TV was a big plus!" },
+    { name: "Family traveler", location: "Karnataka", date: "April 2026", rating: 5, comment: "Samruddhi lived up to its name. Prosperity and comfort in every corner. We loved the state-of-the-art interiors." }
 ];
 
 export default function Home() {
@@ -710,7 +710,7 @@ function GuestHomepageView({
                             <div key={i} className="bg-white p-6 rounded-2xl shadow-sm border border-stone-200 relative flex flex-col justify-between">
                                 <div>
                                     <div className="flex gap-1 text-amber-500 mb-4">
-                                        {[...Array(review.rating)].map((_, idx) => (
+                                        {[...Array(Math.floor(review.rating))].map((_, idx) => (
                                             <span key={idx} className="text-sm">★</span>
                                         ))}
                                     </div>
