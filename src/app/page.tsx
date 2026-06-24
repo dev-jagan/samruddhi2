@@ -328,8 +328,9 @@ function GuestHomepageView({
                             />
                             <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent p-4 md:p-6 flex justify-between items-end">
                                 <div>
-                                    <span className="text-[10px] uppercase font-mono tracking-widest text-stone-300">Space Capture</span>
-                                    <p className="text-white font-medium text-base md:text-lg">{property.images[activeImageIdx]?.caption}</p>
+                                    {property.images[activeImageIdx]?.caption && (
+                                        <p className="text-white font-medium text-base md:text-lg">{property.images[activeImageIdx]?.caption}</p>
+                                    )}
                                 </div>
                                 <span className="text-stone-300 font-mono text-sm">{activeImageIdx + 1} / {property.images.length}</span>
                             </div>
@@ -376,23 +377,20 @@ function GuestHomepageView({
                     {/* Map */}
                     <div>
                         <h2 className={`font-serif text-2xl font-bold mb-6 ${dm ? 'text-white' : 'text-stone-950'}`}>Location & Surroundings</h2>
-                        <div className={`w-full h-[300px] md:h-[400px] rounded-3xl overflow-hidden border shadow-lg ${dm ? 'border-stone-700' : 'border-stone-200'}`}>
+                        <div className={`w-full h-[300px] md:h-[400px] rounded-3xl overflow-hidden border shadow-lg relative ${dm ? 'border-stone-700' : 'border-stone-200'}`}>
                             <iframe
-                                src={property.mapUrl || "https://maps.app.goo.gl/p3va2P2E3joWHTK39"}
+                                src={`https://www.google.com/maps?q=${encodeURIComponent(property.location)}&output=embed`}
                                 width="100%" height="100%"
                                 style={{ border: 0 }}
                                 allowFullScreen={true}
                                 loading="lazy"
                                 referrerPolicy="no-referrer-when-downgrade"
                             ></iframe>
+                            <a href={property.mapUrl || "https://maps.app.goo.gl/p3va2P2E3joWHTK39"} target="_blank" rel="noopener noreferrer"
+                                className={`absolute bottom-3 right-3 text-[10px] font-semibold px-3 py-1.5 rounded-lg shadow transition ${dm ? 'bg-stone-900/90 text-stone-200 hover:bg-stone-800' : 'bg-white/90 text-stone-700 hover:bg-white'}`}>
+                                Open in Google Maps →
+                            </a>
                         </div>
-                        <p className={`mt-4 text-xs font-medium flex items-center gap-2 ${dm ? 'text-stone-400' : 'text-stone-500'}`}>
-                            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                            </svg>
-                            {property.location}
-                        </p>
                         {property.nearbyPlaces && property.nearbyPlaces.length > 0 && (
                             <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-3">
                                 {property.nearbyPlaces.map((place: any, i: number) => (
