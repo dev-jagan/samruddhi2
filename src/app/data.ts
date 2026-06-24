@@ -78,9 +78,90 @@ export const INITIAL_BOOKINGS = [
 ];
 
 export const REVIEWS = [
-    { name: "Recent Guest", location: "Global", date: "June 2026", rating: 4.8, comment: "Spacious with modern lighting. Truly feels like a home away from home. The kitchen is fully equipped and the host Mohan was very responsive." },
-    { name: "Verified Stay", location: "India", date: "May 2026", rating: 5, comment: "Great location near popular attractions but still in a quiet neighborhood. Perfect for families. The 65-inch TV was a big plus!" },
-    { name: "Family traveler", location: "Karnataka", date: "April 2026", rating: 5, comment: "Samruddhi lived up to its name. Prosperity and comfort in every corner. We loved the state-of-the-art interiors." }
+    {
+        name: "Srikumar",
+        location: "Bangalore, India",
+        date: "December 2024",
+        rating: 5,
+        comment: "The property is very well maintained and is very close to the city. The host is very responsive and helpful. The place is very spacious and has all the amenities. We had a great stay. Highly recommend."
+    },
+    {
+        name: "Bharath",
+        location: "Mangalore, India",
+        date: "November 2024",
+        rating: 5,
+        comment: "Very nice and spacious home. Kitchen is fully equipped. Host was very responsive and helpful. Kids loved the space. Will definitely come back again."
+    },
+    {
+        name: "Tejas",
+        location: "Pune, India",
+        date: "October 2024",
+        rating: 5,
+        comment: "Amazing stay! The house is beautifully furnished and very clean. The host Mr. Mohan was very helpful and responsive. Everything was as described. Perfect for a family trip."
+    },
+    {
+        name: "Namitha",
+        location: "Mysore, India",
+        date: "September 2024",
+        rating: 5,
+        comment: "Wonderful place to stay. Very clean, spacious and well-equipped. The location is quite good - close to major areas. Host was cooperative and always available. Highly recommended!"
+    },
+    {
+        name: "Ravi Kumar",
+        location: "Chennai, India",
+        date: "August 2024",
+        rating: 5,
+        comment: "Superb experience! The house is exactly as shown in the photos. The host Mohan is a superhost for a reason - very professional and caring. Loved the modern interiors."
+    },
+    {
+        name: "Pradeep",
+        location: "Hyderabad, India",
+        date: "July 2024",
+        rating: 5,
+        comment: "Ideal for family vacations. Very spacious with two good bedrooms, excellent kitchen with all necessary equipment. The 65 inch TV was a bonus. Great value for money."
+    },
+    {
+        name: "Sneha",
+        location: "Mumbai, India",
+        date: "June 2024",
+        rating: 5,
+        comment: "Beautiful home in a peaceful locality. Everything was clean and in order. Mr. Mohan was extremely helpful and made us feel very welcome. Would definitely stay again!"
+    },
+    {
+        name: "Kiran",
+        location: "Kerala, India",
+        date: "May 2024",
+        rating: 4,
+        comment: "Nice and comfortable stay. The house has good facilities. Host is responsive. Location is decent. Good choice for families."
+    },
+    {
+        name: "Ananya",
+        location: "Delhi, India",
+        date: "April 2024",
+        rating: 5,
+        comment: "Exceptional stay! The place is well-furnished and very spacious. Kids loved the large space to play indoors. Host communicated well and made check-in seamless."
+    },
+    {
+        name: "Manoj",
+        location: "Bangalore, India",
+        date: "March 2024",
+        rating: 5,
+        comment: "This is the best Airbnb I have stayed in Mangalore. Very clean, spacious and all amenities you need for a comfortable stay. Host is excellent. Five stars!"
+    },
+    {
+        name: "Divya",
+        location: "Udupi, India",
+        date: "February 2024",
+        rating: 5,
+        comment: "Very comfortable and homely atmosphere. The property is well maintained and has everything one needs. The host is warm and extremely helpful. Strongly recommend!"
+    },
+    {
+        name: "Arun",
+        location: "Mangalore, India",
+        date: "January 2024",
+        rating: 5,
+        comment: "Great place! Neat and clean. Good facilities - AC, geyser, fully equipped kitchen. The host Mohan is very professional and quick to respond. Would book again!"
+    }
 ];
 
 // Helper to get data from localStorage or fallback to initial
