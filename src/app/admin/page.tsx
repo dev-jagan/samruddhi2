@@ -20,7 +20,7 @@ export default function AdminPage() {
     const [syncStatus, setSyncStatus] = useState("success");
     const [syncLogs, setSyncLogs] = useState<any[]>([
         { time: "00:00:00", type: "success", msg: "Calendar synced. 0 changes detected." },
-        { time: "00:00:00", type: "success", msg: "Saved 9 reservations and 3 blocked blocks." }
+        { time: "00:00:00", type: "success", msg: "Saved 0 reservations and 0 blocked blocks." }
     ]);
 
     const [toast, setToast] = useState<any>(null);
@@ -36,29 +36,6 @@ export default function AdminPage() {
     const [editedHostEmail, setEditedHostEmail] = useState("");
     const [editedHostPhone, setEditedHostPhone] = useState("");
     const [editedAirbnbUrl, setEditedAirbnbUrl] = useState("");
-    const [editedMapUrl, setEditedMapUrl] = useState("");
-
-    const [editedBedrooms, setEditedBedrooms] = useState(0);
-    const [editedBeds, setEditedBeds] = useState(0);
-    const [editedBaths, setEditedBaths] = useState(0);
-
-    // Photo caption editor
-    const [editingImgId, setEditingImgId] = useState<number | null>(null);
-    const [editImgCaption, setEditImgCaption] = useState("");
-
-    // Amenity label editor
-    const [editingAmenityId, setEditingAmenityId] = useState<string | null>(null);
-    const [editAmenityLabel, setEditAmenityLabel] = useState("");
-
-    // Nearby places
-    const [nearbyPlaces, setNearbyPlaces] = useState<any[]>([]);
-    const [editingPlaceIdx, setEditingPlaceIdx] = useState<number | null>(null);
-    const [editPlaceName, setEditPlaceName] = useState("");
-    const [editPlaceDesc, setEditPlaceDesc] = useState("");
-    const [editPlaceLink, setEditPlaceLink] = useState("");
-    const [newPlaceName, setNewPlaceName] = useState("");
-    const [newPlaceDesc, setNewPlaceDesc] = useState("");
-    const [newPlaceLink, setNewPlaceLink] = useState("");
 
     const [newImgUrl, setNewImgUrl] = useState("");
     const [newImgCaption, setNewImgCaption] = useState("");
@@ -97,11 +74,6 @@ export default function AdminPage() {
         setEditedHostEmail(info.hostEmail);
         setEditedHostPhone(info.hostPhone);
         setEditedAirbnbUrl(info.airbnbUrl);
-        setEditedMapUrl(info.mapUrl || "");
-        setNearbyPlaces(info.nearbyPlaces || []);
-        setEditedBedrooms(info.bedrooms);
-        setEditedBeds(info.beds);
-        setEditedBaths(info.baths);
 
         const saved = localStorage.getItem('admin_dark_mode');
         if (saved === 'true') setDarkMode(true);
@@ -146,12 +118,7 @@ export default function AdminPage() {
             hostName: editedHostName,
             hostEmail: editedHostEmail,
             hostPhone: editedHostPhone,
-            airbnbUrl: editedAirbnbUrl,
-            mapUrl: editedMapUrl,
-            nearbyPlaces: nearbyPlaces,
-            bedrooms: Number(editedBedrooms),
-            beds: Number(editedBeds),
-            baths: Number(editedBaths)
+            airbnbUrl: editedAirbnbUrl
         };
         setProperty(updated);
         savePropertyInfo(updated);
@@ -200,38 +167,6 @@ export default function AdminPage() {
         setProperty(updated);
         savePropertyInfo(updated);
         showToast("Image removed", "info");
-    };
-
-    const handleSaveImgCaption = (id: number) => {
-        if (!editImgCaption.trim()) {
-            showToast("Caption cannot be empty", "error");
-            return;
-        }
-        const updated = {
-            ...property,
-            images: property.images.map((img: any) =>
-                img.id === id ? { ...img, caption: editImgCaption } : img
-            )
-        };
-        setProperty(updated);
-        savePropertyInfo(updated);
-        setEditingImgId(null);
-        showToast("Image caption updated", "success");
-    };
-
-    const handleSaveAmenityLabel = (id: string) => {
-        if (!editAmenityLabel.trim()) {
-            showToast("Label cannot be empty", "error");
-            return;
-        }
-        const updatedAmenities = property.amenities.map((am: any) =>
-            am.id === id ? { ...am, label: editAmenityLabel } : am
-        );
-        const updated = { ...property, amenities: updatedAmenities };
-        setProperty(updated);
-        savePropertyInfo(updated);
-        setEditingAmenityId(null);
-        showToast("Amenity label updated", "success");
     };
 
     const triggerSync = () => {
@@ -339,46 +274,6 @@ export default function AdminPage() {
         setReviews(updated);
         saveReviews(updated);
         showToast("Review removed", "info");
-    };
-
-    const handleSavePlace = (idx: number) => {
-        if (!editPlaceName.trim() || !editPlaceLink.trim()) {
-            showToast("Name and map link are required", "error");
-            return;
-        }
-        const updated = [...nearbyPlaces];
-        updated[idx] = { name: editPlaceName, description: editPlaceDesc, mapLink: editPlaceLink };
-        setNearbyPlaces(updated);
-        const propUpdated = { ...property, nearbyPlaces: updated };
-        setProperty(propUpdated);
-        savePropertyInfo(propUpdated);
-        setEditingPlaceIdx(null);
-        showToast("Nearby place updated", "success");
-    };
-
-    const handleAddPlace = () => {
-        if (!newPlaceName.trim() || !newPlaceLink.trim()) {
-            showToast("Name and map link are required", "error");
-            return;
-        }
-        const updated = [...nearbyPlaces, { name: newPlaceName, description: newPlaceDesc, mapLink: newPlaceLink }];
-        setNearbyPlaces(updated);
-        const propUpdated = { ...property, nearbyPlaces: updated };
-        setProperty(propUpdated);
-        savePropertyInfo(propUpdated);
-        setNewPlaceName("");
-        setNewPlaceDesc("");
-        setNewPlaceLink("");
-        showToast("Nearby place added", "success");
-    };
-
-    const handleDeletePlace = (idx: number) => {
-        const updated = nearbyPlaces.filter((_: any, i: number) => i !== idx);
-        setNearbyPlaces(updated);
-        const propUpdated = { ...property, nearbyPlaces: updated };
-        setProperty(propUpdated);
-        savePropertyInfo(propUpdated);
-        showToast("Nearby place removed", "info");
     };
 
     const handleSaveWaNumber = () => {
@@ -585,18 +480,13 @@ export default function AdminPage() {
                                     </div>
                                     <div>
                                         <label className={`text-xs font-bold block mb-1 ${dm ? 'text-stone-300' : 'text-stone-500'}`}>Bedrooms</label>
-                                        <input type="number" value={editedBedrooms} onChange={(e) => setEditedBedrooms(Number(e.target.value))}
-                                            className={`w-full text-xs p-2.5 rounded-xl focus:outline-none ${dm ? 'bg-stone-800 border border-stone-600 text-stone-100' : 'bg-stone-50 border border-stone-200'}`} />
-                                    </div>
-                                    <div>
-                                        <label className={`text-xs font-bold block mb-1 ${dm ? 'text-stone-300' : 'text-stone-500'}`}>Beds</label>
-                                        <input type="number" value={editedBeds} onChange={(e) => setEditedBeds(Number(e.target.value))}
-                                            className={`w-full text-xs p-2.5 rounded-xl focus:outline-none ${dm ? 'bg-stone-800 border border-stone-600 text-stone-100' : 'bg-stone-50 border border-stone-200'}`} />
+                                        <input type="number" value={property.bedrooms} disabled
+                                            className={`w-full text-xs p-2.5 rounded-xl opacity-60 ${dm ? 'bg-stone-800 border border-stone-600 text-stone-400' : 'bg-stone-50 border border-stone-200'}`} />
                                     </div>
                                     <div>
                                         <label className={`text-xs font-bold block mb-1 ${dm ? 'text-stone-300' : 'text-stone-500'}`}>Bathrooms</label>
-                                        <input type="number" value={editedBaths} onChange={(e) => setEditedBaths(Number(e.target.value))}
-                                            className={`w-full text-xs p-2.5 rounded-xl focus:outline-none ${dm ? 'bg-stone-800 border border-stone-600 text-stone-100' : 'bg-stone-50 border border-stone-200'}`} />
+                                        <input type="number" value={property.baths} disabled
+                                            className={`w-full text-xs p-2.5 rounded-xl opacity-60 ${dm ? 'bg-stone-800 border border-stone-600 text-stone-400' : 'bg-stone-50 border border-stone-200'}`} />
                                     </div>
                                 </div>
 
@@ -630,11 +520,6 @@ export default function AdminPage() {
                                             className={`w-full text-xs p-2.5 rounded-xl focus:outline-none ${dm ? 'bg-stone-800 border border-stone-600 text-stone-100' : 'bg-stone-50 border border-stone-200'}`} />
                                     </div>
                                 </div>
-                                <div>
-                                    <label className={`text-xs font-bold block mb-1 ${dm ? 'text-stone-300' : 'text-stone-500'}`}>Google Maps URL</label>
-                                    <input type="text" value={editedMapUrl} onChange={(e) => setEditedMapUrl(e.target.value)}
-                                        className={`w-full text-xs p-2.5 rounded-xl focus:outline-none ${dm ? 'bg-stone-800 border border-stone-600 text-stone-100' : 'bg-stone-50 border border-stone-200'}`} />
-                                </div>
 
                                 <button type="submit" className={`text-xs uppercase font-bold tracking-wider py-3 px-6 rounded-xl shadow transition ${dm ? 'bg-emerald-600 text-white hover:bg-emerald-500' : 'bg-emerald-600 text-white hover:bg-emerald-500'}`}>
                                     Save Settings
@@ -647,29 +532,14 @@ export default function AdminPage() {
                             <h3 className={`font-serif text-lg font-bold mb-4 ${dm ? 'text-white' : 'text-stone-950'}`}>Amenities</h3>
                             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                                 {property.amenities.map((am: any) => (
-                                    <div key={am.id} className={`p-3 rounded-xl border flex flex-col justify-between h-24 transition-all relative ${am.active ? (dm ? 'bg-stone-700 text-white border-stone-500' : 'bg-stone-950 text-white border-stone-950 shadow-sm') : (dm ? 'bg-stone-800 text-stone-400 border-stone-700' : 'bg-stone-50 text-stone-500 border-stone-200')}`}>
-                                        {editingAmenityId === am.id ? (
-                                            <div className="flex flex-col gap-1 h-full justify-center">
-                                                <input type="text" value={editAmenityLabel} onChange={(e) => setEditAmenityLabel(e.target.value)}
-                                                    className={`w-full text-xs p-1.5 rounded-lg focus:outline-none ${dm ? 'bg-stone-900 border border-stone-600 text-stone-200' : 'bg-white border border-stone-200 text-stone-900'}`} />
-                                                <div className="flex gap-1">
-                                                    <button onClick={() => handleSaveAmenityLabel(am.id)} className="text-[10px] text-emerald-500 font-bold">Save</button>
-                                                    <button onClick={() => setEditingAmenityId(null)} className="text-[10px] text-rose-500 font-bold">Cancel</button>
-                                                </div>
-                                            </div>
-                                        ) : (
-                                            <>
-                                                <div className="flex justify-between items-start">
-                                                    <span className="text-lg">{getAmenityIcon(am.icon, dm)}</span>
-                                                    <button onClick={(e) => { e.stopPropagation(); setEditingAmenityId(am.id); setEditAmenityLabel(am.label); }} className="text-[9px] opacity-60 hover:opacity-100 font-bold px-1 cursor-pointer">Edit</button>
-                                                </div>
-                                                <div className="text-xs cursor-pointer" onClick={() => handleToggleAmenity(am.id)}>
-                                                    <span className="block font-medium truncate">{am.label}</span>
-                                                    <span className="text-[9px] opacity-80">{am.active ? "Published" : "Hidden"}</span>
-                                                </div>
-                                            </>
-                                        )}
-                                    </div>
+                                    <button key={am.id} onClick={() => handleToggleAmenity(am.id)}
+                                        className={`p-3 rounded-xl text-left border flex flex-col justify-between h-24 transition-all ${am.active ? (dm ? 'bg-stone-700 text-white border-stone-500' : 'bg-stone-950 text-white border-stone-950 shadow-sm') : (dm ? 'bg-stone-800 text-stone-400 border-stone-700' : 'bg-stone-50 text-stone-500 border-stone-200 hover:border-stone-400')}`}>
+                                        <span className="text-lg">{getAmenityIcon(am.icon, dm)}</span>
+                                        <div className="text-xs">
+                                            <span className="block font-medium truncate">{am.label}</span>
+                                            <span className="text-[9px] opacity-80">{am.active ? "Published" : "Hidden"}</span>
+                                        </div>
+                                    </button>
                                 ))}
                             </div>
                         </div>
@@ -680,29 +550,14 @@ export default function AdminPage() {
                             <div className="space-y-3 max-h-60 overflow-y-auto mb-6 pr-2">
                                 {property.images.map((img: any) => (
                                     <div key={img.id} className={`flex justify-between items-center p-3 rounded-xl border text-xs ${dm ? 'bg-stone-800 border-stone-600' : 'bg-stone-50 border-stone-200'}`}>
-                                        {editingImgId === img.id ? (
-                                            <div className="flex items-center gap-2 w-full">
-                                                <img src={img.url} className="w-12 h-12 object-cover rounded-md shrink-0" alt="preview" />
-                                                <input type="text" value={editImgCaption} onChange={(e) => setEditImgCaption(e.target.value)}
-                                                    className={`flex-1 text-xs p-2 rounded-lg focus:outline-none ${dm ? 'bg-stone-900 border border-stone-600 text-stone-200' : 'bg-white border border-stone-200'}`} />
-                                                <button onClick={() => handleSaveImgCaption(img.id)} className="text-emerald-600 font-bold px-1 shrink-0">Save</button>
-                                                <button onClick={() => setEditingImgId(null)} className="text-rose-600 font-bold px-1 shrink-0">X</button>
+                                        <div className="flex items-center gap-3 min-w-0">
+                                            <img src={img.url} className="w-12 h-12 object-cover rounded-md shrink-0" alt="preview" />
+                                            <div className="min-w-0">
+                                                <span className={`font-medium block truncate ${dm ? 'text-stone-100' : 'text-stone-900'}`}>{img.caption}</span>
+                                                <span className={`text-[10px] truncate block ${dm ? 'text-stone-400' : 'text-stone-500'}`}>{img.url}</span>
                                             </div>
-                                        ) : (
-                                            <>
-                                                <div className="flex items-center gap-3 min-w-0">
-                                                    <img src={img.url} className="w-12 h-12 object-cover rounded-md shrink-0" alt="preview" />
-                                                    <div className="min-w-0">
-                                                        <span className={`font-medium block truncate ${dm ? 'text-stone-100' : 'text-stone-900'}`}>{img.caption}</span>
-                                                        <span className={`text-[10px] truncate block ${dm ? 'text-stone-400' : 'text-stone-500'}`}>{img.url}</span>
-                                                    </div>
-                                                </div>
-                                                <div className="flex gap-1 shrink-0">
-                                                    <button onClick={() => { setEditingImgId(img.id); setEditImgCaption(img.caption); }} className="text-stone-500 hover:text-stone-700 font-bold px-1">Edit</button>
-                                                    <button onClick={() => handleRemoveImage(img.id)} className="text-rose-600 hover:text-rose-800 font-bold px-1">Delete</button>
-                                                </div>
-                                            </>
-                                        )}
+                                        </div>
+                                        <button onClick={() => handleRemoveImage(img.id)} className="text-rose-600 hover:text-rose-800 font-bold px-2 py-1 shrink-0">Delete</button>
                                     </div>
                                 ))}
                             </div>
@@ -718,57 +573,6 @@ export default function AdminPage() {
                                 <button onClick={handleAddNewImage} className={`w-full sm:w-auto text-xs uppercase font-bold py-2 px-4 rounded-lg transition ${dm ? 'bg-stone-100 text-stone-950 hover:bg-stone-200' : 'bg-stone-950 text-white hover:bg-stone-900'}`}>
                                     Add Photo
                                 </button>
-                            </div>
-                        </div>
-
-                        {/* Nearby Places */}
-                        <div className={`rounded-2xl p-6 border shadow-md ${dm ? 'bg-stone-900 border-stone-700' : 'bg-white border-stone-200'}`}>
-                            <h3 className={`font-serif text-lg font-bold mb-4 ${dm ? 'text-white' : 'text-stone-950'}`}>Nearby Places</h3>
-                            <div className="space-y-2 mb-6">
-                                {nearbyPlaces.map((place: any, i: number) => (
-                                    <div key={i} className={`p-3 rounded-xl border text-xs ${dm ? 'bg-stone-800 border-stone-600' : 'bg-stone-50 border-stone-200'}`}>
-                                        {editingPlaceIdx === i ? (
-                                            <div className="space-y-2">
-                                                <input type="text" value={editPlaceName} onChange={(e) => setEditPlaceName(e.target.value)}
-                                                    className={`w-full text-xs p-2 rounded-lg focus:outline-none ${dm ? 'bg-stone-900 border border-stone-600 text-stone-200' : 'bg-white border border-stone-200'}`} />
-                                                <textarea rows={2} value={editPlaceDesc} onChange={(e) => setEditPlaceDesc(e.target.value)}
-                                                    className={`w-full text-xs p-2 rounded-lg focus:outline-none ${dm ? 'bg-stone-900 border border-stone-600 text-stone-200' : 'bg-white border border-stone-200'}`} />
-                                                <input type="text" value={editPlaceLink} onChange={(e) => setEditPlaceLink(e.target.value)}
-                                                    className={`w-full text-xs p-2 rounded-lg focus:outline-none ${dm ? 'bg-stone-900 border border-stone-600 text-stone-200' : 'bg-white border border-stone-200'}`}
-                                                    placeholder="Google Maps link..." />
-                                                <div className="flex gap-2">
-                                                    <button onClick={() => handleSavePlace(i)} className="text-emerald-600 font-bold">Save</button>
-                                                    <button onClick={() => setEditingPlaceIdx(null)} className="text-rose-600 font-bold">Cancel</button>
-                                                </div>
-                                            </div>
-                                        ) : (
-                                            <div className="flex justify-between items-start gap-2">
-                                                <div className="min-w-0">
-                                                    <a href={place.mapLink} target="_blank" rel="noopener noreferrer" className={`font-semibold block hover:underline ${dm ? 'text-stone-100' : 'text-stone-900'}`}>{place.name}</a>
-                                                    <span className={`block ${dm ? 'text-stone-400' : 'text-stone-500'}`}>{place.description}</span>
-                                                </div>
-                                                <div className="flex gap-1 shrink-0">
-                                                    <button onClick={() => { setEditingPlaceIdx(i); setEditPlaceName(place.name); setEditPlaceDesc(place.description); setEditPlaceLink(place.mapLink); }} className="text-xs text-stone-500 hover:text-stone-700 font-bold px-1">Edit</button>
-                                                    <button onClick={() => handleDeletePlace(i)} className="text-xs text-rose-600 font-bold px-1">Del</button>
-                                                </div>
-                                            </div>
-                                        )}
-                                    </div>
-                                ))}
-                            </div>
-                            <div className={`p-4 rounded-xl border ${dm ? 'bg-stone-800 border-stone-600' : 'bg-stone-50 border-stone-200'}`}>
-                                <h4 className={`text-xs font-bold uppercase mb-3 ${dm ? 'text-stone-300' : 'text-stone-700'}`}>Add Place</h4>
-                                <div className="space-y-2">
-                                    <input type="text" placeholder="Place name" value={newPlaceName} onChange={(e) => setNewPlaceName(e.target.value)}
-                                        className={`w-full text-xs p-2.5 rounded-lg focus:outline-none ${dm ? 'bg-stone-900 border border-stone-600 text-stone-200 placeholder-stone-500' : 'bg-white border border-stone-200'}`} />
-                                    <textarea rows={2} placeholder="Short description" value={newPlaceDesc} onChange={(e) => setNewPlaceDesc(e.target.value)}
-                                        className={`w-full text-xs p-2.5 rounded-lg focus:outline-none ${dm ? 'bg-stone-900 border border-stone-600 text-stone-200 placeholder-stone-500' : 'bg-white border border-stone-200'}`} />
-                                    <input type="text" placeholder="Google Maps link..." value={newPlaceLink} onChange={(e) => setNewPlaceLink(e.target.value)}
-                                        className={`w-full text-xs p-2.5 rounded-lg focus:outline-none ${dm ? 'bg-stone-900 border border-stone-600 text-stone-200 placeholder-stone-500' : 'bg-white border border-stone-200'}`} />
-                                    <button onClick={handleAddPlace} className={`text-xs uppercase font-bold py-2 px-4 rounded-lg transition ${dm ? 'bg-stone-100 text-stone-950 hover:bg-stone-200' : 'bg-stone-950 text-white hover:bg-stone-900'}`}>
-                                        Add Place
-                                    </button>
-                                </div>
                             </div>
                         </div>
 
