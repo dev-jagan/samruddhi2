@@ -1,4 +1,4 @@
-// --- INITIAL DATA & SEED STATES (Simulating PostgreSQL Records) ---
+// --- INITIAL DATA & SEED STATES ---
 
 export const INITIAL_PROPERTY_INFO = {
     title: "Samruddhi",
@@ -164,7 +164,19 @@ export const REVIEWS = [
     }
 ];
 
-// Helper to get data from localStorage or fallback to initial
+export const INITIAL_FAQS = [
+    { q: "What are the check-in / check-out timings?", a: "Check-in is from 1:00 PM onward, and check-out is by 11:00 AM. Early check-in or late check-out can be arranged on request." },
+    { q: "Is the entire property private for guests?", a: "Yes, the entire home is exclusively yours during your stay. No shared spaces." },
+    { q: "Is parking available?", a: "Free on-premises parking is available for up to 2 cars." },
+    { q: "Is the kitchen fully equipped?", a: "Yes, the kitchen features Samsung & Hindware appliances, cookware, utensils, and a refrigerator. Just bring your ingredients!" },
+    { q: "Is Wi-Fi included?", a: "Yes, high-speed Wi-Fi is available throughout the property at no extra cost." },
+    { q: "Are pets allowed?", a: "Small, well-behaved pets are allowed with prior intimation. Please inform us at the time of booking." },
+    { q: "What is the cancellation policy?", a: "Free cancellation up to 5 days before check-in. 50% refund between 2–5 days. No refund within 48 hours of check-in." },
+    { q: "How do I access the property?", a: "We provide self-check-in via a secure keybox. The code will be shared on the morning of your check-in." },
+];
+
+export const WA_NUMBER = "919876543210";
+
 export const getPropertyInfo = () => {
     if (typeof window !== 'undefined') {
         const saved = localStorage.getItem('samruddhi_property_info');
@@ -181,6 +193,29 @@ export const getBookings = () => {
     return INITIAL_BOOKINGS;
 };
 
+export const getFaqs = () => {
+    if (typeof window !== 'undefined') {
+        const saved = localStorage.getItem('samruddhi_faqs');
+        return saved ? JSON.parse(saved) : INITIAL_FAQS;
+    }
+    return INITIAL_FAQS;
+};
+
+export const getReviews = () => {
+    if (typeof window !== 'undefined') {
+        const saved = localStorage.getItem('samruddhi_reviews');
+        return saved ? JSON.parse(saved) : REVIEWS;
+    }
+    return REVIEWS;
+};
+
+export const getWaNumber = () => {
+    if (typeof window !== 'undefined') {
+        return localStorage.getItem('samruddhi_wa_number') || WA_NUMBER;
+    }
+    return WA_NUMBER;
+};
+
 export const savePropertyInfo = (info: any) => {
     if (typeof window !== 'undefined') {
         localStorage.setItem('samruddhi_property_info', JSON.stringify(info));
@@ -190,6 +225,24 @@ export const savePropertyInfo = (info: any) => {
 export const saveBookings = (bookings: any[]) => {
     if (typeof window !== 'undefined') {
         localStorage.setItem('samruddhi_bookings', JSON.stringify(bookings));
+    }
+};
+
+export const saveFaqs = (faqs: any[]) => {
+    if (typeof window !== 'undefined') {
+        localStorage.setItem('samruddhi_faqs', JSON.stringify(faqs));
+    }
+};
+
+export const saveReviews = (reviews: any[]) => {
+    if (typeof window !== 'undefined') {
+        localStorage.setItem('samruddhi_reviews', JSON.stringify(reviews));
+    }
+};
+
+export const saveWaNumber = (num: string) => {
+    if (typeof window !== 'undefined') {
+        localStorage.setItem('samruddhi_wa_number', num);
     }
 };
 

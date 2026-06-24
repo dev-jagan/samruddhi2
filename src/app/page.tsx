@@ -1,19 +1,8 @@
 "use client";
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { getPropertyInfo, getBookings, REVIEWS } from './data';
+import { getPropertyInfo, getBookings, getFaqs, getReviews, getWaNumber } from './data';
 import { CalendarGrid, getAmenityIcon } from './components';
-
-const FAQS = [
-  { q: "What are the check-in / check-out timings?", a: "Check-in is from 1:00 PM onward, and check-out is by 11:00 AM. Early check-in or late check-out can be arranged on request." },
-  { q: "Is the entire property private for guests?", a: "Yes, the entire home is exclusively yours during your stay. No shared spaces." },
-  { q: "Is parking available?", a: "Free on-premises parking is available for up to 2 cars." },
-  { q: "Is the kitchen fully equipped?", a: "Yes, the kitchen features Samsung & Hindware appliances, cookware, utensils, and a refrigerator. Just bring your ingredients!" },
-  { q: "Is Wi-Fi included?", a: "Yes, high-speed Wi-Fi is available throughout the property at no extra cost." },
-  { q: "Are pets allowed?", a: "Small, well-behaved pets are allowed with prior intimation. Please inform us at the time of booking." },
-  { q: "What is the cancellation policy?", a: "Free cancellation up to 5 days before check-in. 50% refund between 2–5 days. No refund within 48 hours of check-in." },
-  { q: "How do I access the property?", a: "We provide self-check-in via a secure keybox. The code will be shared on the morning of your check-in." },
-];
 
 export default function Home() {
     const [property, setProperty] = useState<any>(null);
@@ -24,10 +13,14 @@ export default function Home() {
     const [checkOutDate, setCheckOutDate] = useState("");
     const [guestsCount, setGuestsCount] = useState(2);
     const [darkMode, setDarkMode] = useState(false);
+    const [faqs, setFaqs] = useState<any[]>([]);
+    const [waNumber, setWaNumber] = useState("919876543210");
 
     useEffect(() => {
         setProperty(getPropertyInfo());
         setBookings(getBookings());
+        setFaqs(getFaqs());
+        setWaNumber(getWaNumber());
         const saved = localStorage.getItem('samruddhi_dark_mode');
         if (saved === 'true') setDarkMode(true);
     }, []);
@@ -76,7 +69,7 @@ export default function Home() {
 
             {/* WhatsApp Floating Button */}
             <a
-                href={`https://wa.me/919876543210?text=${whatsappMessage("Hi%2C%20I%27m%20interested%20in%20booking%20Samruddhi.%20Could%20you%20please%20share%20availability%20and%20details%3F")}`}
+                href={`https://wa.me/${waNumber}?text=${whatsappMessage("Hi%2C%20I%27m%20interested%20in%20booking%20Samruddhi.%20Could%20you%20please%20share%20availability%20and%20details%3F")}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="fixed bottom-6 right-6 z-50 flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white px-4 py-3 rounded-full shadow-2xl transition-all hover:scale-105 group"
@@ -128,6 +121,8 @@ export default function Home() {
                     showToast={showToast}
                     darkMode={dm}
                     whatsappMessage={whatsappMessage}
+                    faqs={faqs}
+                    waNumber={waNumber}
                 />
             </main>
 
@@ -177,10 +172,16 @@ export default function Home() {
 function GuestHomepageView({
     property, bookings, currentCalDate, setCurrentCalDate,
     checkInDate, setCheckInDate, checkOutDate, setCheckOutDate,
-    guestsCount, setGuestsCount, showToast, darkMode: dm, whatsappMessage
+    guestsCount, setGuestsCount, showToast, darkMode: dm, whatsappMessage,
+    faqs, waNumber
 }: any) {
     const [activeImageIdx, setActiveImageIdx] = useState(0);
     const [openFaq, setOpenFaq] = useState<number | null>(null);
+    const [reviews, setReviews] = useState<any[]>([]);
+
+    useEffect(() => {
+        setReviews(getReviews());
+    }, []);
 
     const handleRedirectToAirbnb = (e: any) => {
         e.preventDefault();
@@ -223,9 +224,9 @@ function GuestHomepageView({
                                 {property.tagline}
                             </p>
                             <div className="flex gap-3 mt-4">
-                                <a href={`#booking-card`} className="inline-flex items-center gap-2 bg-white/20 hover:bg-white/30 backdrop-blur text-white font-semibold text-sm px-5 py-2.5 rounded-xl transition-all shadow-lg">
+                                <button onClick={() => document.getElementById('booking-card')?.scrollIntoView({ behavior: 'smooth', block: 'center' })} className="inline-flex items-center gap-2 bg-white/20 hover:bg-white/30 backdrop-blur text-white font-semibold text-sm px-5 py-2.5 rounded-xl transition-all shadow-lg cursor-pointer">
                                     Check Availability ↓
-                                </a>
+                                </button>
                             </div>
                         </div>
 
@@ -266,7 +267,7 @@ function GuestHomepageView({
                                     <p className="text-emerald-600 text-[10px]">Book directly on WhatsApp for exclusive discount</p>
                                 </div>
                                 <a
-                                    href={`https://wa.me/919876543210?text=${whatsappMessage(`Hi%20Mohan%2C%20I%20want%20to%20book%20Samruddhi%20directly%20for%205%25%20off`)}`}
+                                    href={`https://wa.me/${waNumber}?text=${whatsappMessage(`Hi%20Mohan%2C%20I%20want%20to%20book%20Samruddhi%20directly%20for%205%25%20off`)}`}
                                     target="_blank"
                                     className="w-full bg-green-500 hover:bg-green-600 text-white font-semibold text-xs tracking-wider uppercase py-3.5 rounded-xl transition-all flex items-center justify-center gap-2"
                                 >
@@ -363,7 +364,7 @@ function GuestHomepageView({
                             {property.amenities.filter((a: any) => a.active).map((amenity: any) => (
                                 <div key={amenity.id} className={`flex items-center gap-4 p-4 rounded-xl border shadow-sm ${dm ? 'bg-stone-800 border-stone-700' : 'bg-white border-stone-200/60'}`}>
                                     <div className={`w-10 h-10 rounded-lg flex items-center justify-center font-bold ${dm ? 'bg-stone-700' : 'bg-stone-100'}`}>
-                                        {getAmenityIcon(amenity.icon)}
+                                        {getAmenityIcon(amenity.icon, dm)}
                                     </div>
                                     <div>
                                         <span className={`text-sm font-semibold block ${dm ? 'text-stone-100' : 'text-stone-900'}`}>{amenity.label}</span>
@@ -423,6 +424,7 @@ function GuestHomepageView({
                             setCheckInDate={setCheckInDate}
                             setCheckOutDate={setCheckOutDate}
                             showToast={showToast}
+                            darkMode={dm}
                         />
 
                         {checkInDate && checkOutDate && (
@@ -462,7 +464,7 @@ function GuestHomepageView({
                             </div>
                         </div>
                         <a
-                            href={`https://wa.me/919876543210?text=${whatsappMessage("Hi%20Mohan%2C%20I%27m%20interested%20in%20Samruddhi!")}`}
+                            href={`https://wa.me/${waNumber}?text=${whatsappMessage("Hi%20Mohan%2C%20I%27m%20interested%20in%20Samruddhi!")}`}
                             target="_blank"
                             className="mt-4 w-full flex items-center justify-center gap-2 bg-green-600 hover:bg-green-500 text-white text-xs font-semibold py-2.5 rounded-xl transition-all"
                         >
@@ -480,7 +482,7 @@ function GuestHomepageView({
                         <span className={`text-xs font-mono uppercase tracking-widest block mb-2 ${dm ? 'text-stone-400' : 'text-stone-500'}`}>Guest Testimonials</span>
                         <h2 className={`font-serif text-2xl md:text-3xl font-bold ${dm ? 'text-white' : 'text-stone-950'}`}>What Our Guests Say</h2>
                         <p className={`text-sm mt-2 ${dm ? 'text-stone-400' : 'text-stone-500'}`}>
-                            {REVIEWS.length} verified reviews from guests
+                            {reviews.length} verified reviews from guests
                         </p>
                     </div>
 
@@ -496,7 +498,7 @@ function GuestHomepageView({
                             </div>
                             <div className={`w-px h-10 md:h-12 ${dm ? 'bg-stone-700' : 'bg-stone-200'}`}></div>
                             <div className="text-center">
-                                <div className={`text-3xl md:text-4xl font-serif font-bold ${dm ? 'text-white' : 'text-stone-950'}`}>{REVIEWS.length}</div>
+                                <div className={`text-3xl md:text-4xl font-serif font-bold ${dm ? 'text-white' : 'text-stone-950'}`}>{reviews.length}</div>
                                 <div className={`text-[10px] md:text-xs mt-1 ${dm ? 'text-stone-400' : 'text-stone-500'}`}>Reviews</div>
                             </div>
                             <div className={`w-px h-10 md:h-12 ${dm ? 'bg-stone-700' : 'bg-stone-200'}`}></div>
@@ -508,24 +510,22 @@ function GuestHomepageView({
                     </div>
 
                     {/* Mobile: horizontal scroll */}
-                    <div className="md:hidden overflow-x-auto pb-4 snap-x snap-mandatory scrollbar-hide">
-                        <div className="flex gap-3">
-                            {REVIEWS.map((review: any, i: number) => (
-                                <div key={i} className={`min-w-[75vw] snap-center shrink-0 p-5 rounded-2xl shadow-sm border flex flex-col justify-between ${dm ? 'bg-stone-800 border-stone-700' : 'bg-white border-stone-200'}`}>
-                                    <div>
-                                        <div className="flex gap-1 text-amber-500 mb-3">
-                                            {[...Array(Math.floor(review.rating))].map((_, idx) => (
-                                                <span key={idx} className="text-sm">★</span>
-                                            ))}
-                                        </div>
-                                        <p className={`font-light italic text-sm leading-relaxed mb-4 line-clamp-4 ${dm ? 'text-stone-300' : 'text-stone-700'}`}>"{review.comment}"</p>
+                    <div className="md:hidden overflow-x-auto pb-2 -mx-4 px-4">
+                        <div className="flex gap-4">
+                            {(reviews.length > 0 ? reviews : getReviews()).map((review: any, i: number) => (
+                                <div key={i} className={`w-[75vw] shrink-0 p-5 rounded-2xl shadow-sm border ${dm ? 'bg-stone-800 border-stone-700' : 'bg-white border-stone-200'}`}>
+                                    <div className="flex gap-1 text-amber-500 mb-3">
+                                        {[...Array(Math.floor(review.rating))].map((_, idx) => (
+                                            <span key={idx} className="text-sm">★</span>
+                                        ))}
                                     </div>
+                                    <p className={`font-light italic text-sm leading-relaxed mb-4 ${dm ? 'text-stone-300' : 'text-stone-700'}`}>"{review.comment}"</p>
                                     <div className={`flex items-center gap-3 pt-3 border-t ${dm ? 'border-stone-700' : 'border-stone-100'}`}>
-                                        <div className={`w-9 h-9 rounded-full flex items-center justify-center font-bold text-sm ${dm ? 'bg-stone-700 text-stone-200' : 'bg-stone-100 text-stone-800'}`}>
+                                        <div className={`w-9 h-9 rounded-full flex items-center justify-center font-bold text-sm shrink-0 ${dm ? 'bg-stone-700 text-stone-200' : 'bg-stone-100 text-stone-800'}`}>
                                             {review.name.charAt(0)}
                                         </div>
-                                        <div>
-                                            <span className={`font-semibold text-sm block ${dm ? 'text-white' : 'text-stone-900'}`}>{review.name}</span>
+                                        <div className="min-w-0">
+                                            <span className={`font-semibold text-sm block truncate ${dm ? 'text-white' : 'text-stone-900'}`}>{review.name}</span>
                                             <span className={`text-[10px] ${dm ? 'text-stone-400' : 'text-stone-500'}`}>{review.location} · {review.date}</span>
                                         </div>
                                     </div>
@@ -536,7 +536,7 @@ function GuestHomepageView({
 
                     {/* Desktop grid */}
                     <div className="hidden md:grid md:grid-cols-3 gap-6">
-                        {REVIEWS.slice(0, 6).map((review: any, i: number) => (
+                        {(reviews.length > 0 ? reviews : getReviews()).slice(0, 6).map((review: any, i: number) => (
                             <div key={i} className={`p-6 rounded-2xl shadow-sm border flex flex-col justify-between transition-all hover:shadow-md ${dm ? 'bg-stone-800 border-stone-700' : 'bg-white border-stone-200'}`}>
                                 <div>
                                     <div className="flex gap-1 text-amber-500 mb-4">
@@ -569,7 +569,7 @@ function GuestHomepageView({
                         <h2 className={`font-serif text-2xl md:text-3xl font-bold ${dm ? 'text-white' : 'text-stone-950'}`}>Frequently Asked</h2>
                     </div>
                     <div className="space-y-3">
-                        {FAQS.map((faq, i) => (
+                        {faqs.map((faq: any, i: number) => (
                             <div key={i} className={`rounded-2xl border overflow-hidden transition-all ${dm ? 'border-stone-800 bg-stone-900' : 'border-stone-200 bg-white'}`}>
                                 <button
                                     onClick={() => setOpenFaq(openFaq === i ? null : i)}
