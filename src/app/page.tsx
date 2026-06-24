@@ -490,7 +490,7 @@ function GuestHomepageView({
                         <span className={`text-xs font-mono uppercase tracking-widest block mb-2 ${dm ? 'text-stone-400' : 'text-stone-500'}`}>Guest Testimonials</span>
                         <h2 className={`font-serif text-2xl md:text-3xl font-bold ${dm ? 'text-white' : 'text-stone-950'}`}>What Our Guests Say</h2>
                         <p className={`text-sm mt-2 ${dm ? 'text-stone-400' : 'text-stone-500'}`}>
-                            {reviews.length} verified reviews from guests
+                            150+ verified reviews from guests
                         </p>
                     </div>
 
@@ -506,7 +506,7 @@ function GuestHomepageView({
                             </div>
                             <div className={`w-px h-10 md:h-12 ${dm ? 'bg-stone-700' : 'bg-stone-200'}`}></div>
                             <div className="text-center">
-                                <div className={`text-3xl md:text-4xl font-serif font-bold ${dm ? 'text-white' : 'text-stone-950'}`}>{reviews.length}</div>
+                                <div className={`text-3xl md:text-4xl font-serif font-bold ${dm ? 'text-white' : 'text-stone-950'}`}>150+</div>
                                 <div className={`text-[10px] md:text-xs mt-1 ${dm ? 'text-stone-400' : 'text-stone-500'}`}>Reviews</div>
                             </div>
                             <div className={`w-px h-10 md:h-12 ${dm ? 'bg-stone-700' : 'bg-stone-200'}`}></div>
@@ -520,7 +520,7 @@ function GuestHomepageView({
                     {/* Mobile: horizontal scroll */}
                     <div className="md:hidden overflow-x-auto pb-2 -mx-4 px-4">
                         <div className="flex gap-4">
-                            {(reviews.length > 0 ? reviews : getReviews()).map((review: any, i: number) => (
+                            {(reviews.length > 0 ? reviews : getReviews()).slice(0, 10).map((review: any, i: number) => (
                                 <div key={i} className={`w-[75vw] shrink-0 p-5 rounded-2xl shadow-sm border ${dm ? 'bg-stone-800 border-stone-700' : 'bg-white border-stone-200'}`}>
                                     <div className="flex gap-1 text-amber-500 mb-3">
                                         {[...Array(Math.floor(review.rating))].map((_, idx) => (
