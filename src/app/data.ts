@@ -9,7 +9,7 @@ export const INITIAL_PROPERTY_INFO = {
     beds: 2,
     baths: 2,
     location: "Landlinks Layout, Ashok Nagar, Mangaluru, Karnataka",
-    pricePerNight: 850,
+    pricePerNight: 2000,
     airbnbUrl: "https://www.airbnb.com/rooms/1144005697334700762",
     hostName: "Mohan Nagesh Shenoy",
     hostEmail: "mohan@samruddhi.com",
