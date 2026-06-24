@@ -8,12 +8,19 @@ export const INITIAL_PROPERTY_INFO = {
     bedrooms: 2,
     beds: 2,
     baths: 2,
-    location: "Landlinks Layout, Ashok Nagar, Mangaluru, Karnataka",
+    location: "Samruddhi Homestay, Landlinks Layout, 13/1, Samruddhi 1st Cross, 1-S-28-2346/13, Hoigebail Rd, near Skate City, Hoige Bail, Ashok Nagar, Mangaluru, Karnataka 575006",
+    mapUrl: "https://maps.app.goo.gl/p3va2P2E3joWHTK39",
+    nearbyPlaces: [
+        { name: "Francis Doris Skate City", description: "International standard skating rink and entertainment center just steps from the homestay.", mapLink: "https://www.google.com/maps/place/Francis+Doris+Skate+City/@12.868126,74.833673,17z" },
+        { name: "City Centre Mall", description: "Popular shopping and dining destination in Hampankatta.", mapLink: "https://www.google.com/maps/place/City+Centre+Mall/@12.871421,74.842504,17z" },
+        { name: "Panambur Beach", description: "Scenic beachfront ideal for evening walks and sunsets.", mapLink: "https://www.google.com/maps/place/Panambur+Beach/@12.937222,74.804167,17z" },
+        { name: "Kudroli Gokarnanatha Temple", description: "Famous temple known for its stunning architecture.", mapLink: "https://maps.app.goo.gl/Pqm3Wb7jRb6jq6S5A" }
+    ],
     pricePerNight: 2000,
-    airbnbUrl: "https://www.airbnb.com/rooms/1144005697334700762",
+    airbnbUrl: "https://www.airbnb.com/rooms/53178588",
     hostName: "Mohan Nagesh Shenoy",
     hostEmail: "mohan@samruddhi.com",
-    hostPhone: "+91 9876543210",
+
     images: [
         { id: 1, url: "/images/2c781291-fff0-4385-b1cf-4f9bf1fc01cf.jpg.jpeg", caption: "Premium Exterior View" },
         { id: 2, url: "/images/1fd428c9-8729-420a-be13-6f9d357eeea2.jpg.jpeg", caption: "Ambient Living Area" },

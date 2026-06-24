@@ -59,9 +59,8 @@ export default function Home() {
         <div className={`min-h-screen font-sans antialiased transition-colors duration-300 ${dm ? 'bg-stone-950 text-stone-100' : 'bg-stone-50 text-stone-900'}`}>
 
             {toast && (
-                <div className={`fixed bottom-6 right-6 z-50 flex items-center gap-3 px-5 py-4 rounded-xl shadow-2xl border ${
-                    toast.type === 'error' ? 'bg-rose-50 border-rose-200 text-rose-800' : 'bg-stone-900 border-stone-800 text-stone-50'
-                }`}>
+                <div className={`fixed bottom-6 right-6 z-50 flex items-center gap-3 px-5 py-4 rounded-xl shadow-2xl border ${toast.type === 'error' ? 'bg-rose-50 border-rose-200 text-rose-800' : 'bg-stone-900 border-stone-800 text-stone-50'
+                    }`}>
                     <div className="text-sm font-medium">{toast.message}</div>
                     <button onClick={() => setToast(null)} className="text-stone-400 hover:text-white font-bold ml-2">×</button>
                 </div>
@@ -76,7 +75,7 @@ export default function Home() {
                 title="Chat on WhatsApp"
             >
                 <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
                 </svg>
                 <span className="text-sm font-semibold hidden sm:inline">WhatsApp Us</span>
             </a>
@@ -95,11 +94,11 @@ export default function Home() {
                     >
                         {dm ? (
                             <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                                <path fillRule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clipRule="evenodd"/>
+                                <path fillRule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clipRule="evenodd" />
                             </svg>
                         ) : (
                             <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                                <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"/>
+                                <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" />
                             </svg>
                         )}
                     </button>
@@ -143,7 +142,6 @@ export default function Home() {
                             <li>📍 {property.location}</li>
                             <li>👥 Up to {property.guestCapacity} guests</li>
                             <li>🛏 {property.bedrooms} Bedrooms · {property.beds} Beds</li>
-                            <li>📞 {property.hostPhone}</li>
                             <li>✉️ {property.hostEmail}</li>
                             <li>🏆 Host: {property.hostName} (Superhost)</li>
                         </ul>
@@ -215,7 +213,7 @@ function GuestHomepageView({
                     <div className="max-w-7xl mx-auto flex flex-col md:flex-row md:items-end md:justify-between gap-6">
                         <div className="max-w-3xl">
                             <span className="text-emerald-400 font-mono text-xs uppercase tracking-widest block mb-3">
-                                ★ 5.0 Rating · 12+ Verified Guest Reviews · Superhost
+                                ★ 4.9 Rating · 150+ Verified Guest Reviews · Superhost
                             </span>
                             <h1 className="font-serif text-3xl md:text-5xl font-bold text-white leading-none tracking-tight mb-3">
                                 {property.title}
@@ -247,11 +245,11 @@ function GuestHomepageView({
                                 <div className="grid grid-cols-2 gap-2">
                                     <div className="border border-stone-200 rounded-lg p-2 bg-stone-50">
                                         <label className="text-[10px] text-stone-500 uppercase font-semibold block">Check-in</label>
-                                        <input type="date" value={checkInDate} onChange={(e) => setCheckInDate(e.target.value)} className="w-full bg-transparent text-xs text-stone-800 font-medium focus:outline-none"/>
+                                        <input type="date" value={checkInDate} onChange={(e) => setCheckInDate(e.target.value)} className="w-full bg-transparent text-xs text-stone-800 font-medium focus:outline-none" />
                                     </div>
                                     <div className="border border-stone-200 rounded-lg p-2 bg-stone-50">
                                         <label className="text-[10px] text-stone-500 uppercase font-semibold block">Check-out</label>
-                                        <input type="date" value={checkOutDate} onChange={(e) => setCheckOutDate(e.target.value)} className="w-full bg-transparent text-xs text-stone-800 font-medium focus:outline-none"/>
+                                        <input type="date" value={checkOutDate} onChange={(e) => setCheckOutDate(e.target.value)} className="w-full bg-transparent text-xs text-stone-800 font-medium focus:outline-none" />
                                     </div>
                                 </div>
                                 <div className="border border-stone-200 rounded-lg p-2 bg-stone-50">
@@ -271,12 +269,12 @@ function GuestHomepageView({
                                     target="_blank"
                                     className="w-full bg-green-500 hover:bg-green-600 text-white font-semibold text-xs tracking-wider uppercase py-3.5 rounded-xl transition-all flex items-center justify-center gap-2"
                                 >
-                                    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                                    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" /></svg>
                                     Book Direct — Save 5%
                                 </a>
                                 <button type="submit" className="w-full bg-rose-600 hover:bg-rose-500 text-white font-semibold text-xs tracking-wider uppercase py-3 rounded-xl shadow-lg transition-all flex items-center justify-center gap-2">
                                     Reserve on Airbnb
-                                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
                                 </button>
                             </form>
                         </div>
@@ -288,10 +286,10 @@ function GuestHomepageView({
             <section className={`border-b py-6 px-4 transition-colors duration-300 ${dm ? 'bg-stone-900 border-stone-800' : 'bg-white border-stone-200'}`}>
                 <div className="max-w-7xl mx-auto flex flex-wrap justify-around items-center gap-6">
                     {[
-                        { icon: "👥", label: "Guest Capacity", value: `${property.guestCapacity} Adults Max`},
-                        { icon: "🛏", label: "Bedrooms & Beds", value: `${property.bedrooms} Bedrooms · ${property.beds} Beds`},
-                        { icon: "🚿", label: "Bathrooms", value: `${property.baths} Bathrooms`},
-                        { icon: "🏆", label: "Host Rating", value: "Superhost · 4.9★"},
+                        { icon: "👥", label: "Guest Capacity", value: `${property.guestCapacity} Adults Max` },
+                        { icon: "🛏", label: "Bedrooms & Beds", value: `${property.bedrooms} Bedrooms · ${property.beds} Beds` },
+                        { icon: "🚿", label: "Bathrooms", value: `${property.baths} Bathrooms` },
+                        { icon: "🏆", label: "Host Rating", value: "Superhost · 4.9★" },
                     ].map((s, i) => (
                         <div key={i} className="flex items-center gap-3">
                             <span className="text-2xl">{s.icon}</span>
@@ -350,7 +348,7 @@ function GuestHomepageView({
                                         onClick={() => setActiveImageIdx(idx)}
                                         className={`shrink-0 h-16 md:h-20 w-24 md:w-28 rounded-lg overflow-hidden border-2 transition-all ${idx === activeImageIdx ? 'border-stone-950 ring-2 ring-stone-400' : 'border-transparent opacity-60 hover:opacity-100'}`}
                                     >
-                                        <img src={img.url} className="w-full h-full object-cover" alt="thumbnail"/>
+                                        <img src={img.url} className="w-full h-full object-cover" alt="thumbnail" />
                                     </button>
                                 ))}
                             </div>
@@ -380,7 +378,7 @@ function GuestHomepageView({
                         <h2 className={`font-serif text-2xl font-bold mb-6 ${dm ? 'text-white' : 'text-stone-950'}`}>Location & Surroundings</h2>
                         <div className={`w-full h-[300px] md:h-[400px] rounded-3xl overflow-hidden border shadow-lg ${dm ? 'border-stone-700' : 'border-stone-200'}`}>
                             <iframe
-                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3889.280173822452!2d74.8488346!3d12.8896593!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba35a39626359f1%3A0xe53046f17e250170!2sLandlinks%20Layout%2C%20Ashok%20Nagar%2C%20Mangaluru%2C%20Karnataka%20575006!5e0!3m2!1sen!2sin!4v1718700000000!5m2!1sen!2sin"
+                                src={property.mapUrl || "https://maps.app.goo.gl/p3va2P2E3joWHTK39"}
                                 width="100%" height="100%"
                                 style={{ border: 0 }}
                                 allowFullScreen={true}
@@ -390,11 +388,27 @@ function GuestHomepageView({
                         </div>
                         <p className={`mt-4 text-xs font-medium flex items-center gap-2 ${dm ? 'text-stone-400' : 'text-stone-500'}`}>
                             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                             </svg>
                             {property.location}
                         </p>
+                        {property.nearbyPlaces && property.nearbyPlaces.length > 0 && (
+                            <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                {property.nearbyPlaces.map((place: any, i: number) => (
+                                    <a key={i} href={place.mapLink} target="_blank" rel="noopener noreferrer"
+                                        className={`flex items-start gap-3 p-4 rounded-xl border transition-all hover:shadow-md ${dm ? 'bg-stone-800 border-stone-700 hover:bg-stone-700' : 'bg-stone-50 border-stone-200 hover:bg-white'}`}>
+                                        <div className={`w-8 h-8 rounded-lg flex items-center justify-center text-sm shrink-0 ${dm ? 'bg-stone-700 text-stone-300' : 'bg-stone-200 text-stone-600'}`}>
+                                            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+                                        </div>
+                                        <div className="min-w-0">
+                                            <span className={`text-sm font-semibold block ${dm ? 'text-white' : 'text-stone-900'}`}>{place.name}</span>
+                                            <span className={`text-xs block ${dm ? 'text-stone-400' : 'text-stone-500'}`}>{place.description}</span>
+                                        </div>
+                                    </a>
+                                ))}
+                            </div>
+                        )}
                     </div>
                 </div>
 
@@ -407,7 +421,7 @@ function GuestHomepageView({
                         </div>
 
                         <div className={`grid grid-cols-3 gap-2 py-3 rounded-xl px-2 mb-4 text-[10px] font-mono border ${dm ? 'bg-stone-800 border-stone-700' : 'bg-stone-50 border-stone-100'}`}>
-                            {[['bg-emerald-500', 'Available'],['bg-rose-500','Booked'],['bg-stone-400','Blocked']].map(([col, label]) => (
+                            {[['bg-emerald-500', 'Available'], ['bg-rose-500', 'Booked'], ['bg-stone-400', 'Blocked']].map(([col, label]) => (
                                 <div key={label} className="flex items-center justify-center gap-1.5">
                                     <span className={`w-2.5 h-2.5 rounded ${col} inline-block`}></span>
                                     <span className={dm ? 'text-stone-300' : 'text-stone-700'}>{label}</span>
@@ -456,11 +470,7 @@ function GuestHomepageView({
                         <div className="border-t border-stone-800 pt-4 space-y-2 text-xs">
                             <div className="flex justify-between text-stone-400">
                                 <span>Response rate:</span>
-                                <span className="text-emerald-400 font-semibold">100% / Within 10 mins</span>
-                            </div>
-                            <div className="flex justify-between text-stone-400">
-                                <span>Inquiry Hotline:</span>
-                                <span className="text-white font-medium">{property.hostPhone}</span>
+                                <span className="text-emerald-400 font-semibold">100% / Within 60 mins</span>
                             </div>
                         </div>
                         <a
@@ -468,7 +478,7 @@ function GuestHomepageView({
                             target="_blank"
                             className="mt-4 w-full flex items-center justify-center gap-2 bg-green-600 hover:bg-green-500 text-white text-xs font-semibold py-2.5 rounded-xl transition-all"
                         >
-                            <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                            <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" /></svg>
                             Contact Host
                         </a>
                     </div>
@@ -492,7 +502,7 @@ function GuestHomepageView({
                             <div className="text-center">
                                 <div className={`text-3xl md:text-4xl font-serif font-bold ${dm ? 'text-white' : 'text-stone-950'}`}>4.9</div>
                                 <div className="flex gap-0.5 justify-center mt-1">
-                                    {[1,2,3,4,5].map(s => <span key={s} className="text-amber-400 text-base md:text-lg">★</span>)}
+                                    {[1, 2, 3, 4, 5].map(s => <span key={s} className="text-amber-400 text-base md:text-lg">★</span>)}
                                 </div>
                                 <div className={`text-[10px] md:text-xs mt-1 ${dm ? 'text-stone-400' : 'text-stone-500'}`}>Overall</div>
                             </div>
