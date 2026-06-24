@@ -29,6 +29,7 @@ body {
 /* Smooth dark mode transition */
 html {
   transition: color-scheme 0.3s;
+  scroll-behavior: smooth;
 }
 
 /* Hide number input spinners */
