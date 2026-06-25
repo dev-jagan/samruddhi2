@@ -17,10 +17,12 @@ export default function Home() {
     const [waNumber, setWaNumber] = useState("919876543210");
 
     useEffect(() => {
-        setProperty(getPropertyInfo());
-        setBookings(getBookings());
-        setFaqs(getFaqs());
-        setWaNumber(getWaNumber());
+        (async () => {
+            setProperty(await getPropertyInfo());
+            setBookings(await getBookings());
+            setFaqs(await getFaqs());
+            setWaNumber(await getWaNumber());
+        })();
         const saved = localStorage.getItem('samruddhi_dark_mode');
         if (saved === 'true') setDarkMode(true);
     }, []);
@@ -178,7 +180,9 @@ function GuestHomepageView({
     const [reviews, setReviews] = useState<any[]>([]);
 
     useEffect(() => {
-        setReviews(getReviews());
+        (async () => {
+            setReviews(await getReviews());
+        })();
     }, []);
 
     const handleRedirectToAirbnb = (e: any) => {
@@ -520,7 +524,7 @@ function GuestHomepageView({
                     {/* Mobile: horizontal scroll */}
                     <div className="md:hidden overflow-x-auto pb-2 -mx-4 px-4">
                         <div className="flex gap-4">
-                            {(reviews.length > 0 ? reviews : getReviews()).slice(0, 10).map((review: any, i: number) => (
+                            {reviews.slice(0, 10).map((review: any, i: number) => (
                                 <div key={i} className={`w-[75vw] shrink-0 p-5 rounded-2xl shadow-sm border ${dm ? 'bg-stone-800 border-stone-700' : 'bg-white border-stone-200'}`}>
                                     <div className="flex gap-1 text-amber-500 mb-3">
                                         {[...Array(Math.floor(review.rating))].map((_, idx) => (
@@ -544,7 +548,7 @@ function GuestHomepageView({
 
                     {/* Desktop grid */}
                     <div className="hidden md:grid md:grid-cols-3 gap-6">
-                        {(reviews.length > 0 ? reviews : getReviews()).slice(0, 6).map((review: any, i: number) => (
+                        {reviews.slice(0, 6).map((review: any, i: number) => (
                             <div key={i} className={`p-6 rounded-2xl shadow-sm border flex flex-col justify-between transition-all hover:shadow-md ${dm ? 'bg-stone-800 border-stone-700' : 'bg-white border-stone-200'}`}>
                                 <div>
                                     <div className="flex gap-1 text-amber-500 mb-4">

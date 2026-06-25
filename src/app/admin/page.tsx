@@ -79,32 +79,34 @@ export default function AdminPage() {
     const [editReviewComment, setEditReviewComment] = useState("");
 
     useEffect(() => {
-        const info = getPropertyInfo();
-        const bks = getBookings();
-        setProperty(info);
-        setBookings(bks);
-        setFaqs(getFaqs());
-        setReviews(getReviews());
-        setWaNumber(getWaNumber());
+        (async () => {
+            const info = await getPropertyInfo();
+            const bks = await getBookings();
+            setProperty(info);
+            setBookings(bks);
+            setFaqs(await getFaqs());
+            setReviews(await getReviews());
+            setWaNumber(await getWaNumber());
 
-        setEditedTitle(info.title);
-        setEditedTagline(info.tagline);
-        setEditedDescription(info.description);
-        setEditedPrice(info.pricePerNight);
-        setEditedCapacity(info.guestCapacity);
-        setEditedLocation(info.location);
-        setEditedHostName(info.hostName);
-        setEditedHostEmail(info.hostEmail);
-        setEditedHostPhone(info.hostPhone);
-        setEditedAirbnbUrl(info.airbnbUrl);
-        setEditedMapUrl(info.mapUrl || "");
-        setNearbyPlaces(info.nearbyPlaces || []);
-        setEditedBedrooms(info.bedrooms);
-        setEditedBeds(info.beds);
-        setEditedBaths(info.baths);
+            setEditedTitle(info.title);
+            setEditedTagline(info.tagline);
+            setEditedDescription(info.description);
+            setEditedPrice(info.pricePerNight);
+            setEditedCapacity(info.guestCapacity);
+            setEditedLocation(info.location);
+            setEditedHostName(info.hostName);
+            setEditedHostEmail(info.hostEmail);
+            setEditedHostPhone(info.hostPhone);
+            setEditedAirbnbUrl(info.airbnbUrl);
+            setEditedMapUrl(info.mapUrl || "");
+            setNearbyPlaces(info.nearbyPlaces || []);
+            setEditedBedrooms(info.bedrooms);
+            setEditedBeds(info.beds);
+            setEditedBaths(info.baths);
 
-        const saved = localStorage.getItem('admin_dark_mode');
-        if (saved === 'true') setDarkMode(true);
+            const saved = localStorage.getItem('admin_dark_mode');
+            if (saved === 'true') setDarkMode(true);
+        })();
     }, []);
 
     useEffect(() => {
@@ -133,7 +135,7 @@ export default function AdminPage() {
         }
     };
 
-    const handleSavePropertyInfo = (e: any) => {
+    const handleSavePropertyInfo = async (e: any) => {
         e.preventDefault();
         const updated = {
             ...property,
@@ -154,22 +156,22 @@ export default function AdminPage() {
             baths: Number(editedBaths)
         };
         setProperty(updated);
-        savePropertyInfo(updated);
+        await savePropertyInfo(updated);
         showToast("Property settings saved!", "success");
     };
 
-    const handleToggleAmenity = (id: string) => {
+    const handleToggleAmenity = async (id: string) => {
         const updatedAmenities = property.amenities.map((am: any) => {
             if (am.id === id) return { ...am, active: !am.active };
             return am;
         });
         const updated = { ...property, amenities: updatedAmenities };
         setProperty(updated);
-        savePropertyInfo(updated);
+        await savePropertyInfo(updated);
         showToast("Amenity status updated", "success");
     };
 
-    const handleSaveImgCaption = (id: number) => {
+    const handleSaveImgCaption = async (id: number) => {
         if (!editImgCaption.trim()) {
             showToast("Caption cannot be empty", "error");
             return;
@@ -181,12 +183,12 @@ export default function AdminPage() {
             )
         };
         setProperty(updated);
-        savePropertyInfo(updated);
+        await savePropertyInfo(updated);
         setEditingImgId(null);
         showToast("Image caption updated", "success");
     };
 
-    const handleSaveAmenityLabel = (id: string) => {
+    const handleSaveAmenityLabel = async (id: string) => {
         if (!editAmenityLabel.trim()) {
             showToast("Label cannot be empty", "error");
             return;
@@ -196,12 +198,12 @@ export default function AdminPage() {
         );
         const updated = { ...property, amenities: updatedAmenities };
         setProperty(updated);
-        savePropertyInfo(updated);
+        await savePropertyInfo(updated);
         setEditingAmenityId(null);
         showToast("Amenity label updated", "success");
     };
 
-    const handleSavePlace = (idx: number) => {
+    const handleSavePlace = async (idx: number) => {
         if (!editPlaceName.trim() || !editPlaceLink.trim()) {
             showToast("Name and map link are required", "error");
             return;
@@ -211,12 +213,12 @@ export default function AdminPage() {
         setNearbyPlaces(updated);
         const propUpdated = { ...property, nearbyPlaces: updated };
         setProperty(propUpdated);
-        savePropertyInfo(propUpdated);
+        await savePropertyInfo(propUpdated);
         setEditingPlaceIdx(null);
         showToast("Nearby place updated", "success");
     };
 
-    const handleAddPlace = () => {
+    const handleAddPlace = async () => {
         if (!newPlaceName.trim() || !newPlaceLink.trim()) {
             showToast("Name and map link are required", "error");
             return;
@@ -225,23 +227,23 @@ export default function AdminPage() {
         setNearbyPlaces(updated);
         const propUpdated = { ...property, nearbyPlaces: updated };
         setProperty(propUpdated);
-        savePropertyInfo(propUpdated);
+        await savePropertyInfo(propUpdated);
         setNewPlaceName("");
         setNewPlaceDesc("");
         setNewPlaceLink("");
         showToast("Nearby place added", "success");
     };
 
-    const handleDeletePlace = (idx: number) => {
+    const handleDeletePlace = async (idx: number) => {
         const updated = nearbyPlaces.filter((_: any, i: number) => i !== idx);
         setNearbyPlaces(updated);
         const propUpdated = { ...property, nearbyPlaces: updated };
         setProperty(propUpdated);
-        savePropertyInfo(propUpdated);
+        await savePropertyInfo(propUpdated);
         showToast("Nearby place removed", "info");
     };
 
-    const handleAddNewImage = () => {
+    const handleAddNewImage = async () => {
         if (!newImgUrl || !newImgCaption) {
             showToast("Please provide both image URL and caption", "error");
             return;
@@ -254,13 +256,13 @@ export default function AdminPage() {
             ]
         };
         setProperty(updated);
-        savePropertyInfo(updated);
+        await savePropertyInfo(updated);
         setNewImgUrl("");
         setNewImgCaption("");
         showToast("New image added to gallery!", "success");
     };
 
-    const handleRemoveImage = (id: number) => {
+    const handleRemoveImage = async (id: number) => {
         if (property.images.length <= 1) {
             showToast("At least one image must remain.", "error");
             return;
@@ -270,11 +272,11 @@ export default function AdminPage() {
             images: property.images.filter((img: any) => img.id !== id)
         };
         setProperty(updated);
-        savePropertyInfo(updated);
+        await savePropertyInfo(updated);
         showToast("Image removed", "info");
     };
 
-    const triggerSync = () => {
+    const triggerSync = async () => {
         if (!icalUrl || !icalUrl.startsWith("http")) {
             showToast("Please provide a valid iCal URL", "error");
             return;
@@ -323,66 +325,66 @@ export default function AdminPage() {
         }, 1000);
     };
 
-    const handleResetCalendar = () => {
+    const handleResetCalendar = async () => {
         setBookings(INITIAL_BOOKINGS);
-        saveBookings(INITIAL_BOOKINGS);
+        await saveBookings(INITIAL_BOOKINGS);
         showToast("Calendar reset to seed data", "info");
     };
 
-    const handleSaveFaq = (idx: number) => {
+    const handleSaveFaq = async (idx: number) => {
         const updated = [...faqs];
         updated[idx] = { q: editFaqQ, a: editFaqA };
         setFaqs(updated);
-        saveFaqs(updated);
+        await saveFaqs(updated);
         setEditingFaqIdx(null);
         showToast("FAQ updated", "success");
     };
 
-    const handleAddFaq = () => {
+    const handleAddFaq = async () => {
         if (!newFaqQ || !newFaqA) {
             showToast("Please enter both question and answer", "error");
             return;
         }
         const updated = [...faqs, { q: newFaqQ, a: newFaqA }];
         setFaqs(updated);
-        saveFaqs(updated);
+        await saveFaqs(updated);
         setNewFaqQ("");
         setNewFaqA("");
         showToast("FAQ added", "success");
     };
 
-    const handleDeleteFaq = (idx: number) => {
+    const handleDeleteFaq = async (idx: number) => {
         const updated = faqs.filter((_: any, i: number) => i !== idx);
         setFaqs(updated);
-        saveFaqs(updated);
+        await saveFaqs(updated);
         showToast("FAQ removed", "info");
     };
 
-    const handleSaveReview = (idx: number) => {
+    const handleSaveReview = async (idx: number) => {
         const updated = [...reviews];
         updated[idx] = { name: editReviewName, location: editReviewLocation, date: editReviewDate, rating: editReviewRating, comment: editReviewComment };
         setReviews(updated);
-        saveReviews(updated);
+        await saveReviews(updated);
         setEditingReviewIdx(null);
         showToast("Review updated", "success");
     };
 
-    const handleAddReview = () => {
+    const handleAddReview = async () => {
         const updated = [...reviews, { name: "New Guest", location: "India", date: new Date().toLocaleString('default', { month: 'long', year: 'numeric' }), rating: 5, comment: "Great stay!" }];
         setReviews(updated);
-        saveReviews(updated);
+        await saveReviews(updated);
         showToast("New review added", "success");
     };
 
-    const handleDeleteReview = (idx: number) => {
+    const handleDeleteReview = async (idx: number) => {
         const updated = reviews.filter((_: any, i: number) => i !== idx);
         setReviews(updated);
-        saveReviews(updated);
+        await saveReviews(updated);
         showToast("Review removed", "info");
     };
 
-    const handleSaveWaNumber = () => {
-        saveWaNumber(waNumber);
+    const handleSaveWaNumber = async () => {
+        await saveWaNumber(waNumber);
         showToast("WhatsApp number saved", "success");
     };
 
