@@ -125,7 +125,7 @@ export default function AdminPage() {
 
     const handleAdminLogin = (e: any) => {
         e.preventDefault();
-        if (adminPass === "admin123" || adminPass.toLowerCase() === "admin") {
+        if (adminPass === "admin" || adminPass.toLowerCase() === "admin") {
             setIsAdminAuthenticated(true);
             showToast("Access granted to management portal", "success");
         } else {
@@ -403,7 +403,7 @@ export default function AdminPage() {
                             <label className={`text-xs font-bold uppercase tracking-wider block mb-1 ${dm ? 'text-stone-300' : 'text-stone-600'}`}>Password</label>
                             <input
                                 type="password"
-                                placeholder="Enter 'admin'"
+                                placeholder="Enter Password"
                                 value={adminPass}
                                 onChange={(e) => setAdminPass(e.target.value)}
                                 className={`w-full p-3 rounded-xl text-sm focus:outline-none focus:ring-2 ${dm ? 'bg-stone-800 border-stone-600 text-stone-100 focus:ring-stone-400' : 'bg-stone-50 border border-stone-200 focus:ring-stone-950'}`}
