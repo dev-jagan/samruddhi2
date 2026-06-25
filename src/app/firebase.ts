@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getFirestore, doc, setDoc, getDoc, collection, getDocs } from "firebase/firestore";
+import { getFirestore, doc, setDoc, getDocFromServer } from "firebase/firestore";
 import { INITIAL_PROPERTY_INFO, INITIAL_BOOKINGS, REVIEWS, INITIAL_FAQS, WA_NUMBER } from "./data";
 
 const firebaseConfig = {
@@ -17,7 +17,7 @@ export const db = getFirestore(app);
 
 export async function fbGetPropertyInfo() {
   try {
-    const snap = await getDoc(doc(db, "property_info", "main"));
+    const snap = await getDocFromServer(doc(db, "property_info", "main"));
     if (snap.exists()) return snap.data();
   } catch (e) { console.warn("Firebase read error (property_info):", e); }
   return INITIAL_PROPERTY_INFO;
@@ -32,7 +32,7 @@ export async function fbSavePropertyInfo(info: any) {
 
 export async function fbGetBookings() {
   try {
-    const snap = await getDoc(doc(db, "bookings", "data"));
+    const snap = await getDocFromServer(doc(db, "bookings", "data"));
     if (snap.exists()) return snap.data().list || [];
   } catch (e) { console.warn("Firebase read error (bookings):", e); }
   return INITIAL_BOOKINGS;
@@ -47,7 +47,7 @@ export async function fbSaveBookings(list: any[]) {
 
 export async function fbGetReviews() {
   try {
-    const snap = await getDoc(doc(db, "reviews", "data"));
+    const snap = await getDocFromServer(doc(db, "reviews", "data"));
     if (snap.exists()) return snap.data().list || [];
   } catch (e) { console.warn("Firebase read error (reviews):", e); }
   return REVIEWS;
@@ -62,7 +62,7 @@ export async function fbSaveReviews(list: any[]) {
 
 export async function fbGetFaqs() {
   try {
-    const snap = await getDoc(doc(db, "faqs", "data"));
+    const snap = await getDocFromServer(doc(db, "faqs", "data"));
     if (snap.exists()) return snap.data().list || [];
   } catch (e) { console.warn("Firebase read error (faqs):", e); }
   return INITIAL_FAQS;
@@ -77,7 +77,7 @@ export async function fbSaveFaqs(list: any[]) {
 
 export async function fbGetWaNumber() {
   try {
-    const snap = await getDoc(doc(db, "settings", "wa_number"));
+    const snap = await getDocFromServer(doc(db, "settings", "wa_number"));
     if (snap.exists()) return snap.data().value || WA_NUMBER;
   } catch (e) { console.warn("Firebase read error (wa_number):", e); }
   return WA_NUMBER;

@@ -14,7 +14,7 @@ export default function Home() {
     const [guestsCount, setGuestsCount] = useState(2);
     const [darkMode, setDarkMode] = useState(false);
     const [faqs, setFaqs] = useState<any[]>([]);
-    const [waNumber, setWaNumber] = useState("919876543210");
+    const [waNumber, setWaNumber] = useState("919999999999");
 
     useEffect(() => {
         (async () => {

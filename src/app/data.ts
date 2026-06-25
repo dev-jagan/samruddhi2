@@ -184,13 +184,13 @@ export const INITIAL_FAQS = [
     { q: "How do I access the property?", a: "We provide self-check-in via a secure keybox. The code will be shared on the morning of your check-in." },
 ];
 
-export const WA_NUMBER = "919876543210";
+export const WA_NUMBER = "";
 
 export const getPropertyInfo = async () => {
     try {
         const fb = await fbGetPropertyInfo();
         if (fb !== INITIAL_PROPERTY_INFO) return fb;
-    } catch {}
+    } catch { }
     if (typeof window !== 'undefined') {
         const saved = localStorage.getItem('samruddhi_property_info');
         if (saved) return JSON.parse(saved);
@@ -201,8 +201,8 @@ export const getPropertyInfo = async () => {
 export const getBookings = async () => {
     try {
         const fb = await fbGetBookings();
-        if (fb.length > 0) return fb;
-    } catch {}
+        if (fb !== INITIAL_BOOKINGS) return fb;
+    } catch { }
     if (typeof window !== 'undefined') {
         const saved = localStorage.getItem('samruddhi_bookings');
         if (saved) return JSON.parse(saved);
@@ -213,8 +213,8 @@ export const getBookings = async () => {
 export const getFaqs = async () => {
     try {
         const fb = await fbGetFaqs();
-        if (fb.length > 0) return fb;
-    } catch {}
+        if (fb !== INITIAL_FAQS) return fb;
+    } catch { }
     if (typeof window !== 'undefined') {
         const saved = localStorage.getItem('samruddhi_faqs');
         if (saved) return JSON.parse(saved);
@@ -225,8 +225,8 @@ export const getFaqs = async () => {
 export const getReviews = async () => {
     try {
         const fb = await fbGetReviews();
-        if (fb.length > 0) return fb;
-    } catch {}
+        if (fb !== REVIEWS) return fb;
+    } catch { }
     if (typeof window !== 'undefined') {
         const saved = localStorage.getItem('samruddhi_reviews');
         if (saved) return JSON.parse(saved);
@@ -237,8 +237,8 @@ export const getReviews = async () => {
 export const getWaNumber = async () => {
     try {
         const fb = await fbGetWaNumber();
-        if (fb) return fb;
-    } catch {}
+        if (fb !== WA_NUMBER) return fb;
+    } catch { }
     if (typeof window !== 'undefined') {
         const ls = localStorage.getItem('samruddhi_wa_number');
         if (ls) return ls;
@@ -247,35 +247,35 @@ export const getWaNumber = async () => {
 };
 
 export const savePropertyInfo = async (info: any) => {
-    try { await fbSavePropertyInfo(info); } catch {}
+    try { await fbSavePropertyInfo(info); } catch { }
     if (typeof window !== 'undefined') {
         localStorage.setItem('samruddhi_property_info', JSON.stringify(info));
     }
 };
 
 export const saveBookings = async (bookings: any[]) => {
-    try { await fbSaveBookings(bookings); } catch {}
+    try { await fbSaveBookings(bookings); } catch { }
     if (typeof window !== 'undefined') {
         localStorage.setItem('samruddhi_bookings', JSON.stringify(bookings));
     }
 };
 
 export const saveFaqs = async (faqs: any[]) => {
-    try { await fbSaveFaqs(faqs); } catch {}
+    try { await fbSaveFaqs(faqs); } catch { }
     if (typeof window !== 'undefined') {
         localStorage.setItem('samruddhi_faqs', JSON.stringify(faqs));
     }
 };
 
 export const saveReviews = async (reviews: any[]) => {
-    try { await fbSaveReviews(reviews); } catch {}
+    try { await fbSaveReviews(reviews); } catch { }
     if (typeof window !== 'undefined') {
         localStorage.setItem('samruddhi_reviews', JSON.stringify(reviews));
     }
 };
 
 export const saveWaNumber = async (num: string) => {
-    try { await fbSaveWaNumber(num); } catch {}
+    try { await fbSaveWaNumber(num); } catch { }
     if (typeof window !== 'undefined') {
         localStorage.setItem('samruddhi_wa_number', num);
     }

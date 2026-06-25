@@ -543,7 +543,7 @@ export default function AdminPage() {
                                     className={`flex-1 text-xs p-2.5 rounded-xl focus:outline-none focus:ring-1 ${dm ? 'bg-stone-800 border border-stone-600 text-stone-200 focus:ring-stone-400' : 'bg-stone-50 border border-stone-200 focus:ring-stone-950'}`} />
                                 <button onClick={handleSaveWaNumber} className={`text-xs font-bold px-4 py-2 rounded-xl transition ${dm ? 'bg-emerald-600 text-white hover:bg-emerald-500' : 'bg-emerald-600 text-white hover:bg-emerald-500'}`}>Save</button>
                             </div>
-                            <p className="text-[10px] mt-1 opacity-60">Include country code, no + sign. E.g., 919876543210</p>
+                            <p className="text-[10px] mt-1 opacity-60">Include country code, no + sign. E.g., 919999999999</p>
                         </div>
                     </div>
 
